@@ -1,0 +1,16 @@
+{% extends "prjtask/layout.html" %}
+
+{% block body %}
+<div class="container"><br><br>
+<form method="POST" id="fid" >
+    {% csrf_token %}
+    
+    {{form}}
+    <br>
+    <input type ="submit" class="btn btn-outline-success" value="Add Project" id = "sub" >
+    
+    
+</form>
+</div>
+
+{% endblock %}

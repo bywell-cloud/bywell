@@ -1,0 +1,70 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ user.username | title }}'s Whishlist</h2>
+
+    <div class="album py-5 bg-light">
+
+        
+        <div class="container">
+            {% if messages  %}
+                {% for messages in messages %}
+                    <p  class=" alert alert-success "  >
+                        {{messages }}
+                    </p>  
+                {% endfor %} 
+            {% endif %}       
+           
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% if list0  %}{% for list0 in list0 %} 
+            {% for whish in whish %}
+            {% if whish.wlistings_id == list0.id  %}
+                
+                
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <center> 
+                        <div align = "right">
+                            <a href="{% url 'remove' list0.id %}" class="btn  btn-outline-success">Remove listing</a>
+                        </div>
+                        <img  src =" {{list0.image.url}}" width="300" hieght="250">
+                        <div class="card-body">
+                            <p class="card-text">{{ list0.p_name }}<br>
+                            
+                            <i><small >bid closing date : {{list0.end_time}}</small></i>
+                            
+                            <div class=" d-flex justify-content-between align-items-center">
+                               
+                                
+                                <div class="btn-group">
+                                    <a href="{% url 'listsingle' whish.id %} " class="btn  btn-success">More & Bid</a>
+                                    
+                                    <br>
+                                    
+                                    <table width="70%"><tr><td align ="right"><br>
+                                                                                          
+                                                    ${{list0.bid | floatformat:2 }}
+                                               
+                                                                                  
+                                         
+                                         <br><br></td></tr>
+                                        
+                                    </table>
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                        </center>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor  %} 
+                {% endfor  %} 
+                {% endif %}
+            </div>
+            
+               
+
+        </div>
+    </div>
+{% endblock %}

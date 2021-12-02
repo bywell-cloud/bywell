@@ -1,0 +1,29 @@
+{% extends "prjtask/layout.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="row row-cols-1 g-1">
+               
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                                        
+                    <p class="card-text">
+<form method="POST" id="fid" >
+    {% csrf_token %}
+    
+    {{form.as_p}}
+    
+    <input type ="submit" class="btn btn-outline-success" value="Create & Assign Task" id = "sub" >
+    
+    
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<div class="row py-5 px-4">
+    <div class="col-md-5">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3">
+                        <img src="{% static "network/images/per.png" %}"  alt="pic" width="140" >
+                        <a href="#" class="btn btn-dark btn-sm btn-block">Edit profile</a>
+                    </div>
+                    <div class="media-body mb-4 ">
+                        <h4 class="mt-0 mb-0">Name : {{user0.username}}</h4>
+                        <p class="small mb-3"> <i class="fas fa-map-marker-alt mr-2"></i></p>
+                    </div>
+                    {% if post0  %}
+                        {% for result in post0 %}
+                            {% if result.author_id == user.id  %}
+                                
+                            {% else %}
+                    
+                                {% if unfollow1 == 1  %}
+                                    <div class="top">
+                                       <a href="{% url 'unfollow' user0.id %}" class="btn btn-outline-dark top" ><b>Unfollow Me</b></a>
+                                    </div>
+                                {% else %} 
+                                    <div class="top">
+                                        <a href="{% url 'follow' user0.id %}" class="btn btn-outline-dark top" ><b>Follow Me</b></a>
+                                    </div>  
+              
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}    
+                    {% endif %}        
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                   
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{user0.follower_no}}</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Following  </small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{user0.following_no}}</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Followers</small>
+                    </li>
+                </ul>
+            </div>
+           
+        </div>
+    </div>
+</div>
+<hr>
+{% if post0  %}
+    {% for result in post0 %}
+            <hr>
+            Post by : <a href="{% url 'profile' result.author_id %}" > {% for resultx in userx %} {% if resultx.id == result.author_id %}{{resultx.username}} {% endif %}{% endfor %} </a> <br><br>
+            {% if user.id == result.author_id %}
+                <a href ="{% url 'editpost' result.id %}">Edit</a> <br>
+            {% else %}   
+              
+            {% endif %}
+            
+            Post : {{result.newpost}} <br><br>
+            Created Date : {{result.created_date}} <br>
+            Add likes :<a href ="{% url 'likesadd' result.id %}" > <img src="{% static "network/images/likes.png" %}"  alt="likes" width="18" height="19">{{result.likes}} </a>
+
+
+            
+            
+           
+    {% endfor %} 
+    {% endif %}        
+
+{% endblock %}   

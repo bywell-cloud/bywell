@@ -1,0 +1,82 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings  {% for title in title  %} for {{title.name}} {% endfor %}</h2>
+
+    <div class="album py-5 bg-light">
+        <div align = "right">
+            <a href="{% url 'create' %}" class="btn  btn-outline-success">Create Listing</a>
+        </div>
+        <div class="container">
+            {% if messages  %}
+                {% for messages in messages %}
+                    <p  class=" alert alert-success "  >
+                        {{messages }}
+                    </p>  
+                {% endfor %} 
+            {% endif %}       
+             
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+               
+                {% for list in product  %}
+                
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <center> 
+                        <img  src =" {{list.image.url}}" width="300" hieght="250">
+                        <div class="card-body">
+                            <p class="card-text">{{ list.p_name }}<br>
+                            
+                            <i><small >bid closing date : {{list.end_time}}<br>
+                             Description : {{list.p_description}}
+                            </small></i>                           
+                            
+                            </p> 
+                            <div class=" d-flex justify-content-between align-items-center">
+                               
+                                
+                                <div class="btn-group">
+                                    <a href="{% url 'listsingle' list.id %} " class="btn  btn-success">More & Bid</a>
+                                    
+                                    <br>
+                                    <a href="{%  url 'whishlistadd' list.id  %}" > <img src="{{ MEDIA_URL }}/images/images/whishlist.png" width="100" height="75"  class="btn  btn-outline-success"> </a>
+                                    <table width="50%"><tr><td align ="right"><br> $
+                                                                                          
+                                                    {{list.bid | floatformat:2 }}
+                                                
+                                        <br><br></td></tr>
+                                        
+                                    </table>
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                        </center>
+                    </div>
+                </div>
+                {% endfor  %}
+            </div>
+            <div class="row row-cols-1  g-1">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <h3><u>Comments</u></h3>
+                        <div class="card-body">
+                            {% for comment in comment  %}
+                                Comment by :{{comment.user}}  
+                                <br>
+                                For Product: {{comment.listing}}
+                                <br>
+                                Message: {{comment.body}}
+                                <br>
+                                <hr>
+                            {% endfor %}
+                        </div>    
+                    </div>    
+                </div> 
+
+            </div>
+               
+
+        </div>
+    </div>
+{% endblock %}

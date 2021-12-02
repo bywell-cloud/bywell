@@ -1,0 +1,88 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+        
+        <h2>Winner ({{user.username}})  </h2>
+
+    <div class="album py-5 bg-light">
+      
+        <div class="container">
+           
+             
+            <div class="row row-cols-1 ">
+                
+                
+                <div class="col">
+                   
+                    <div class="card shadow-lm">
+                        
+                        
+                        <div class="card-body">
+                            
+                            <table  class="table " >
+                                <tr >
+                                    <th > Name  </th>
+                                    <th > Item Won  </th>
+                                   
+                                    <th > Email  </th>
+                                    <th> Phone</th>
+                                    
+                                </tr>
+                                
+                                {% for list0 in list0  %}
+                                
+                                    
+                                        {% if bidlist == list0.id  %}
+                                            {% if user1  %}
+                                                
+                                                   
+                                                    <tr>
+                                                        <td >
+                                                            
+                                                            {{user1.username}}
+                                                                
+                                                        </td>
+                                                        <td>
+                                                            {{list0.p_name}}
+
+                                                        </td>  
+                                                          
+                                                        <td>
+                                                            {{user1.email}}
+                                                        </td> 
+                                                        <td>
+                                                            {{user1.phone}}
+                                                        </td>  
+                                                    </tr>   {% endif  %}  
+
+                                                
+                                            
+                                        {% endif  %}
+                                                                                           
+                                                
+                                 
+                                            
+                                {% endfor  %} 
+                                <br><br></td></tr>
+                                
+                            </table>
+                            <div class=" d-flex justify-content-between align-items-center">
+                               
+                                
+                                <div class="btn-group">
+                                    
+                               
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                        </center>
+                    </div>
+                </div>
+                
+            </div>
+                           
+
+        </div>
+    </div>
+  {% endblock  %}

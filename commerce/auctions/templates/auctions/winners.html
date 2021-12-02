@@ -1,0 +1,103 @@
+{% extends "auctions/menuwinners.html" %}
+
+{% block body %}
+        
+        <h2>Winners  </h2>
+
+    <div class="album py-5 bg-light">
+      
+        <div class="container">
+           
+             
+            <div class="row row-cols-1 ">
+                
+                
+                <div class="col">
+                    {% if messages   %}
+                    {% for messages in messages  %}
+                    {% if messages.tags == "success" %}
+                        <p  class=" alert alert-success "  >
+                            {{messages }}
+                        </p>  
+                    {% endif %}
+                    {% if messages.tags == "error" %}
+                        <p  class=" alert alert-danger "  >
+                            {{messages }}
+                        </p>  
+                    {% endif %}
+                        
+                    {% endfor  %}
+                    {% endif  %}
+
+                    <div class="card shadow-lm">
+                        
+                        
+                        <div class="card-body">
+                            
+                            <table  class="table " >
+                                <tr >
+                                    <th > Name  </th>
+                                    <th > Item Won  </th>
+                                    <th>  Price  </th>
+                                    <th > Contacts <br><samll> (visible only to the lister)</samll>  </th>
+                                    
+                                </tr>
+                                
+                                {% for list0 in list0  %}
+                                {% if win0  %}
+                                    {% for bid0 in win0 %}
+                                        {% if bid0.listing_id == list0.id  %}
+                                            {% if user1  %}
+                                                {% for user1 in user1   %}
+                                                    {% if user1.id == bid0.user_id  %}
+                                                    <tr>
+                                                        <td >
+                                                            
+                                                                 {{user1.username}}
+                                                                
+                                                        </td>
+                                                        <td>
+                                                            {{list0.p_name}}
+
+                                                        </td>  
+                                                        <td>
+                                                            {{bid0.price}}
+
+                                                        </td>   
+                                                        <td>
+                                                            <a href = "{% url 'view' id=list0.id us_id=bid0.user_id %}  "  class="btn btn-primary">  View </a>
+
+                                                        </td>   
+                                                    </tr>   {% endif  %}  
+
+                                                {% endfor  %}
+                                            {% endif  %}
+                                        {% endif  %}
+                                    {% endfor  %}                                                        
+                                                
+                                {% endif  %}    
+                                            
+                                {% endfor  %} 
+                                <br><br></td></tr>
+                                
+                            </table>
+                            <div class=" d-flex justify-content-between align-items-center">
+                               
+                                
+                                <div class="btn-group">
+                                    
+                               
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                        </center>
+                    </div>
+                </div>
+                
+            </div>
+                           
+
+        </div>
+    </div>
+  {% endblock  %}

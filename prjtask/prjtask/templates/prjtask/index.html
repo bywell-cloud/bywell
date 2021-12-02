@@ -1,0 +1,207 @@
+{% extends "prjtask/layout.html" %}
+{% load static %}
+{% block link %}
+<script src="{% static 'prjtask/js/js2222121.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+{% endblock%}
+{% block body %}
+{% if messages  %}
+    {% for messages in messages %}
+    <p  class=" alert alert-success "  >
+    {{messages }}
+    </p>  
+    {% endfor %} 
+{% endif %}
+
+{% if rolelevel == 1 %}
+    
+    <div class="container"> 
+        <h4><b><u><i>Projects List</u></i></u></b></h4>
+        
+    <div class="btnright">
+       
+        <a class="btn-outline-success" style="float: right; " href="{% url 'addproject' %}">[ Add New Project ]<br></a>
+    </div>
+    <table class="table" width="100%">
+        <tr bgcolor="#cccccc" >
+            <font color="#ffffff">
+                <th bgcolor="#c5c5c5"> Name</th>
+                <th>Created</th>
+                
+                <th>Tasks</th>
+                <th>No. of Completed</th>
+               
+                <th>Action</th>
+
+
+            </font>
+        
+        </tr>
+        {% if prj %}
+            {% for prj in prj %}
+                 <tr>
+                     <td>{{prj.name}}</td>
+                     <td>{{prj.start}}</td>
+                     <td>{{prj.counttask}}</td>
+                     
+                     <td>
+                        {{ prj.completed }}
+                        
+
+                        
+                    </td>
+                     
+                     <td><a href="{% url 'assign' prj.id %}" class="btn-outline-success">Assign </a> / <a href="{% url 'view' prj.id %}" class="btn-outline-success"> View Tasks </a>/<a href="{% url 'deletepr' prj.id %}" class="btn-outline-success">Delete(Project) </a>  </td>
+                     
+                     
+                     
+                 </tr>  
+            {% endfor %}
+        {% endif %}         
+        
+    </table>
+    </div>
+{% else %}
+<div class="container"> 
+    <h4><b><u><i>Tasks assigned to {{user.username}}</u></i></u></b></h4>
+    
+         
+             <table style="float: right; "  width="100%">
+                 <tr>
+                     <td><a class="btn-outline-success" href="{% url 'index' %}">[ All Projects Assigned to me ]</a></td>
+                     <td><font color="white">-------------------</fontcolor></td><td></td>
+                     <td>
+                         <form name="form1">
+                            <select name= "stxt" id="searchtxt1" class="form-control">
+                                <option selected disabled="True">---Select Project Name --- </option>
+                                {% if prjtsk %}
+                                
+                                 
+                                {% for prjtsk in prjtsk %}{% for task0 in task01 %}
+                                {% if task0.project_id == prjtsk.id %}
+                                <option value="{{prjtsk.id}}">{{prjtsk.name}}</option>
+                                {% endif %}
+                                {% endfor %}
+                                {% endfor %}
+                                {% endif %}
+                              </select>
+
+                         <!--input type="text" id = "searchtxt1" name="stxt" class="form-control" -->
+
+                         </form>
+                    </td>
+                     <td>
+                         <button  id ="searchtx"  value = "Search" class="btn-outline-success" id ="searchbtn"onclick ="search()" >Search By Project</button></td>
+
+
+                     </td>
+                 </tr>
+             </table>
+        
+        
+       
+       
+        
+    </form>
+</div><br><br>
+<div class="container">
+    <div id="tb">
+
+    </div>
+
+<table class="table" width="100%" id="searchaall" >
+    <tr bgcolor="#00cc33" >
+        <font color="#ffffff">
+            <th > Name</th>
+            
+            
+            <th>Description</th>
+            <th>Expected to Start</th>
+            <th>Due Date</th>
+            <th>Project</th>
+            <th>Assiged By</th>
+            
+            <th>%Progress</th><th>Progress/<br>Problems</th>
+            
+            <th>Check<br> Completed</th>
+            <th>Action</th>
+
+
+        </font>
+    
+    </tr><div >{% if task0 %}
+    {% for prj in task0 %}
+         <tr>
+             <td>{{prj.name}}0</td>
+             <td>{{prj.t_description}}</td>
+             <td>{{prj.start_time}}</td>
+             <td>{{prj.expected_end}}</td>
+             <td>{% for prj1 in prj1 %}{% if prj.project_id == prj1.id %}{{prj1.name}}{% endif %}{% endfor %}</td>
+             
+             <td>{% for userall in user00 %}{% if prj.tuser_id == userall.id %}{{userall.username}}{% endif %}{% endfor %}</td>
+             <td><div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{prj.status}}"
+                aria-valuemin="0" aria-valuemax="100" style="width:{{prj.status}}%">
+            </div>
+        </div>{{prj.status}}% Done</td>
+        <td>{% if prj.progress == None %}None{% else %} <!-- Modal HTML embedded directly into document -->
+            <div id="ex1{{prj.id}}" style="display:none;">
+                <textarea readonly class="form-control"> {{prj.progress}} </textarea> <a href="#" rel="modal:close">Close</a> or press ESC</p>
+              </div>     
+            <!-- Link to open the modal -->
+            <p><a href="#ex1{{prj.id}}" rel="modal:open">View</a></p>{% endif %}</td>
+             <td>{% if prj.status == 100 %} Completed{% else %}<font color="red">Not Finished</font> {% endif %}</td>
+             
+            
+            <td>{% if prj.status == 100 %}Task Completed
+                 <br> <font color="grey"><h6><i>(Only Manager can Amend)</i></h6></font>{% else %}<a href="{% url 'action' prj.id %}" class="btn-outline-success">Update Progress </a> {% endif %}
+                 
+                </td>
+             
+             
+             
+         </tr>  
+    {% endfor %}
+{% endif %}     </div>  
+<div id ="second">
+
+</div>  
+
+</table>
+
+
+<!--table class="table" width="100%">
+    <tr bgcolor="#00cc33"  id ="searchspecific">
+        <font color="#ffffff">
+            <th > Name</th>
+            
+            
+            <th>Description</th>
+            <th>Expected to Start</th>
+            <th>Due Date</th>
+            <th>Project</th>
+            <th>Assiged By</th>
+            
+            <th>Progress</th>
+            
+            <th>Status</th>
+            <th>Action</th>
+
+
+        </font>
+
+    
+    </tr>
+    
+             
+
+</table-->
+<div id="view"></div>
+    
+    
+    
+{% endif %}    
+{% endblock %}

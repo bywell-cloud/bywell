@@ -1,0 +1,163 @@
+{% extends "prjtask/layout.html" %}
+{% load static %}
+{% block link %}
+<script src="{% static 'prjtask/js/js22.js' %}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+
+{% endblock%}
+{% block body %}
+{% if messages  %}
+    {% for messages in messages %}
+    <p  class=" alert alert-success "  >
+    {{messages }}
+    </p>  
+    {% endfor %} 
+{% endif %}
+    
+    <div class="container">
+         
+        <h4><b><u><i>Tasks for project({% if prj0 %}{{prj0.name}}  {% endif %})</u></i></u></b></h4><div style="float: right; "><a href = "{% url 'index' %}"><< Project Lst</a></div>
+        <div class="viewt">
+        <div >
+            <button id="btnright" class="btn-outline-success"   onclick="viewtasks()"> View Tasks by Me(For-{{prj0.name}}) <br></button>
+        </div>
+        <div >
+            <button  id="btnright1" class="btn-outline-success"  onclick="viewtasksall()"> View All Tasks(For-{{prj0.name}})<br></button>
+        </div>
+        
+        
+    <table class="table" id="viewall" width="100%">
+        <tr bgcolor="#cccccc" >
+            <font color="#ffffff">
+                
+                <th bgcolor="#c5c5c5">Expected Started </th>
+                <th> Name</th>
+                <th>Description</th>
+                
+                <th>Due Date</th><th>Expected <br> Time Left</th>
+                <th>Assigned By</th>
+                <th>Assigned To</th>
+                <th>%Progress</th><th>Progress& Problems</th>
+                <th>Completed</th>
+                <td>Action</td>
+                
+                
+
+
+            </font>
+        
+        </tr>
+        <div>
+        {% if task0 %}
+            {% for task0 in task0 %}
+            
+                 <tr>
+                     <td>{{task0.start_time}}</td>
+                     <td>{{task0.name}}</td>
+                     
+                     <td>{{task0.t_description}}</td>
+
+                     <td>{{task0.expected_end}}</td><td>{{task0.expected_end|timeuntil}}</td>
+                     <th>{% for user0 in user0 %}{% if task0.tuser_id == user0.id %}{{user0.username}}{% endif %}{%endfor %}</th>
+                     <th>{% for user0 in user0 %}{% if task0.asignedto_id == user0.id %}{{user0.username}}{% endif %}{%endfor %}</th>
+                     <td><div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{task0.status}}"
+                        aria-valuemin="0" aria-valuemax="100" style="width:{{task0.status}}%">
+                          
+                        </div>
+                      </div>{{task0.status}}% completed</td><td><!-- Modal HTML embedded directly into document -->
+                        <div id="ex1{{task0.id}}" style="display:none;">
+                            <textarea readonly class="form-control"> {{task0.progress}} </textarea> <a href="#" rel="modal:close">Close</a> or press ESC</p>
+                          </div>     
+                        <!-- Link to open the modal -->
+                        <p><a href="#ex1{{task0.id}}" rel="modal:open">View</a></p></td>
+                     <td>{% if task0.status == 100 %}Yes{% else %}No{% endif %}</td>
+                     <td> {% if task0.tuser_id == user.id %}<a href="{% url 'edit' task0.id %}" class="btn-outline-success"> Edit </a>
+                     
+                     /<a href="{% url 'delete' task0.id %}" class="btn-outline-success"> Delete </a>
+                     {% else %}N/A
+                     {% endif %}
+                     </td>
+                     
+                 </tr>  
+                 </div> 
+            {% endfor %}
+        {% endif %}
+        
+  
+    </table></div>
+    
+    
+    <table class="table" id="viewone"  width="100%">
+      <tr bgcolor="#cccccc" >
+          <font color="#ffffff">
+              
+              <th bgcolor="#c5c5c5">Expected Started </th>
+              <th> Name</th>
+              <th>Description</th>
+              
+              <th>Due Date</th><th>Expected <br> Time Left</th>
+              <th>Assigned By</th>
+              <th>Assigned To</th>
+              <th>%Progress</th><th>Progress&<br>Problems</th>
+              <th>Completed</th>
+              <th>Action</th>
+              
+              
+
+
+          </font>
+      
+      </tr>
+      <div>
+
+        {% if task0 %}
+            {% for task0 in task0 %}         
+        
+                 
+                    {% if task0.tuser_id == user.id %}
+                    <tr>
+                        <td>{{task0.start_time}}</td>
+                        <td>{{task0.name}}</td>
+                        
+                        <td>{{task0.t_description}}</td>
+   
+                        <td>{{task0.expected_end}}</td><td>{{task0.expected_end|timeuntil}}</td>
+                        <th>{% for user0 in user0 %}{% if task0.tuser_id == user0.id %}{{user0.username}}{% endif %}{%endfor %}</th>
+                        <th>{% for user0 in user0 %}{% if task0.asignedto_id == user0.id %}{{user0.username}}{% endif %}{%endfor %}</th>
+                        <td><div class="progress">
+                           <div class="progress-bar" role="progressbar" aria-valuenow="{{task0.status}}"
+                           aria-valuemin="0" aria-valuemax="100" style="width:{{task0.status}}%">
+                             
+                           </div>
+                         </div>{{task0.status}}% completed</td><td><!-- Modal HTML embedded directly into document -->
+                            <div id="ex1{{task0.id}}" style="display:none;">
+                                <textarea readonly class="form-control"> {{task0.progress}} </textarea> <a href="#" rel="modal:close">Close</a> or press ESC</p>
+                              </div>     
+                            <!-- Link to open the modal -->
+                            <p><a href="#ex1{{task0.id}}" rel="modal:open">View</a></p></td>
+                        <td>{% if task0.status == 100 %}Yes{% else %}No{% endif %}</td>
+                        <td> <a href="{% url 'edit' task0.id %}" class="btn-outline-success"> Edit </a>/
+                            <a href="{% url 'delete' task0.id %}" class="btn-outline-success"> Delete </a>
+                        </td>
+                     
+                        
+                        
+                    </tr> 
+                    {% endif %} 
+
+                 
+            {% endfor %}
+        {% endif %}         
+      </div>
+    </table>
+    
+  
+  
+    
+{% endblock %}

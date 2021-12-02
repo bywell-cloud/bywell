@@ -1,0 +1,93 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h3>All Posts</h3>
+<br>
+{% if messages  %}
+  {% for messages in messages %}
+    <p  class=" alert alert-success "  >
+      {{messages }}
+    </p>  
+  {% endfor %} 
+{% endif %}       
+
+<div id ="newp1">
+           
+</div>
+    <form method="POST" id="fid" >
+        {% csrf_token %}
+        
+        <textarea name="newpost" id="newp" class="form-control" cols="40" rows="4" autofocus ></textarea>
+        <br>
+        <input type= "hidden" id="postid" name ="postid" value="0">
+        
+            <input type ="submit" class="btn btn-primary" value="Post" id = "sub" >
+        
+        
+    </form>
+    <div id = "eddiv">
+
+    </div>
+
+    <hr>
+    Comments
+    {% if resultpost  %}
+        {% for result in p %}
+            <hr>
+            Post by : <a href="{% url 'profile' result.author_id %}" > {% for resultx in userx %} {% if resultx.id == result.author_id %}{{resultx.username}} {% endif %}{% endfor %}</a> <br><br>
+            {% if user.id == result.author_id %}
+                <button onclick="upedit({{result.id}})" id="ed{{result.id}}" >Edit</button> <br>
+            {% else %}   
+              
+            {% endif %}
+            
+            Post : {{result.newpost}} <br><br>
+            <form>
+                <input type ="hidden" id ="post{{result.id}}" value = "{{result.newpost}}">
+            </form>    
+            Created Date : {{result.created_date}} <br>
+                
+            <p id="total{{result.id }}">Likes: {{result.likes }}</p>
+            <div id="divcheck" value = "{{result.id}}" > 
+            {% if request.user in result.liked.all  %}
+           
+            <button  onclick="lik({{result.id}} )" id="a{{result.id}}" >  <img src="{% static "network/images/likes2.png" %}" id ="likespng{{id}}"  alt="likes" width="18" height="19"> UnLike</button>
+            
+            {% else %}  
+            
+            <button   onclick="unlik({{result.id}} )"  id="una{{result.id}}"><img src="{% static "network/images/likes.png" %}" id ="likespng{{id}}"  alt="likes" width="18" height="19"> Like</button> 
+            
+            {% endif %}
+            </div>
+       <div id =likeid>
+           
+       </div>
+         
+           
+        {% endfor %} 
+    {% endif %}        
+    {% if p.has_other_pages %}
+    <ul class="pagination">
+      {% if p.has_previous %}
+        <li><a href="?page={{ p.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in p.paginator.page_range %}
+        {% if p.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if p.has_next %}
+        <li><a href="?page={{ p.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+
+{% endblock %}

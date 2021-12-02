@@ -1,0 +1,183 @@
+body , input , button {
+
+font-family: arial,sans-serif;
+font-size: 14px;
+color: #222;
+     
+}
+
+
+h3 {
+
+font-family: arial,sans-serif;
+     font-size: 16px;
+     color: #555555;
+}
+
+
+.table,td {
+
+font-family: arial,sans-serif;
+     font-size: 14px;
+}
+.cs50glogo {  
+                
+    margin-top: 30px; 
+    margin-bottom:20px ;
+ }
+
+.cs50glogoAdv {  
+                
+    margin-top: 1px; 
+    margin-bottom:1px ;
+ }
+.adv{ 
+ margin-top: 1px;
+ display: block;
+  text-align: left;
+
+}
+
+ ul {
+     
+    list-style-type: none;
+    overflow: hidden;
+ }
+
+ li {
+    float: right; 
+    
+ }
+
+
+ li a {
+    font-family:
+    arial,sans-serif;
+    color: #222;
+    display: block;
+    text-align: center;
+    padding: 10px 10px;
+    text-decoration: none;
+    font-size:14px;
+  }
+
+ .inputsearch {
+    
+    height: 20px ;
+    border:none;
+    width:582px;
+    padding: 10px 20px ;
+    border-radius:25px;
+    outline: none;
+    border:1px solid #cccccc;
+    background: #fff;
+     }
+    
+
+
+ .advsearch {
+    
+    height: 16px ;
+    border:none;
+    width:582px;
+    padding: 10px 20px ;
+    
+    outline: none;
+    border:1px solid #cccccc;
+    background: #fff;
+     }
+  
+  
+  .button{
+     
+    
+     color:#333333;
+     font-size:15px;
+     padding: 10px 20px;
+     margin:5px;
+     border-radius:4px;
+     outline:none;
+     background-color: #f4f4f4;
+     border: 1px solid #f4f4f4;
+            
+     font-family: arial,sans-serif;
+     font-size: 14px;
+            
+     line-height: 20px;
+     height: 36px;
+     min-width: 54px;
+     text-align: center;
+     cursor: pointer;      
+   }
+.button1{
+     
+    
+     font-size:15px;
+     padding: 10px 20px;
+     margin:5px;
+     border-radius:4px;
+     outline:none;
+     background-color: #4d90fe;;
+     border: 1px solid #3079ed;
+     color: #fff;            
+     font-family: arial,sans-serif;
+     font-size: 14px;
+}
+
+   
+   .button:hover {
+            border-color: #cccccc;
+
+        }
+   
+        
+        
+    @media (max-width: 599px){
+            body {
+                background-color: rgba(241, 176, 185, 0.774);
+            }
+        }
+        
+        
+        
+.top {
+    color: #D93025;
+    font: 20px arial, sans-serif;
+    margin: 18px 30px;
+
+}
+        
+             
+.container{
+  
+            text-align: center;
+        }            
+      
+      
+      
+      
+.mylink {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1%;
+
+}
+
+.mylink2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1%;
+
+}      
+      
+#patch {
+    margin-top: 30px;
+    width: 100%;
+    height: 60px;
+    border-style: solid;
+    border-color: #ffffff;
+    background-color: #ffffff;
+}
+

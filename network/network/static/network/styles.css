@@ -1,0 +1,23 @@
+.profile-head {
+    
+    background-color :#1479ee
+}
+
+.cover {
+   
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+body {
+    background: #eeeef0;
+    
+    min-height: 100vh;
+    overflow-x: hidden
+}
+
+.top {
+    margin-right: 5px;
+    margin-top: 0px;
+    position: absolute; top: 2px; right: 5px;
+}

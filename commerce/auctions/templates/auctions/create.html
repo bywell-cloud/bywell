@@ -1,0 +1,26 @@
+{% extends "auctions/layoutcreate.html" %}
+
+{% block body %}
+    <h2>Create a Listing</h2>
+    {% if messages %}   
+    {% for messages in messages %} 
+        <p  class=" alert alert-danger "  >
+        {{messages}}
+        </p>
+       
+     {% endfor  %}
+     {% endif  %}
+     
+        <form name = "form" action = "{% url 'create' %} " method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+       
+       
+        
+            <input type = "submit" class ="btn btn-sm btn-outline-success">
+        </form>
+    
+     
+    
+
+{% endblock %}

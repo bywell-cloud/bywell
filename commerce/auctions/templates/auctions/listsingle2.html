@@ -1,0 +1,128 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Details for {{ list.p_name }}</h2>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row ">
+                <div class="col-ms-12">
+                    <center>
+                    {% for msgtop in msgtop  %} 
+                    {{msgtop}}
+                    {% endfor %}   
+                    <br> 
+                    
+                    {% if messages   %}
+                    {% for messages in messages  %}
+                    
+                        <p {% if messages.tags == "success" %} class=" alert alert-success " {% endif %} >
+                            {{messages }}
+                        </p>  
+                       
+                    
+                        <p {% if messages.tags == "warning" %} class=" alert alert-warning " {% endif %} >
+                            {{messages }}
+                        </p>  
+                    
+                        
+                    {% endfor  %}
+                    {% endif  %}
+
+                    <br>
+                    {% for msgtop in msgtop  %}    
+                        {{msgtop}}
+                    {% endfor %}       
+                                                
+                    </center>
+                </div>
+
+            </div>
+            <div class="row row-cols-1 g-1">
+               
+                <div class="col">
+                    <div class="card shadow-sm">
+                         
+                        <table >
+                            <tr>
+                                <td>
+                                <img  src =" {{list.image.url}}" width="600" hieght="500">
+                                </td>
+                                <td>
+                                
+                                    <div class="card-body">
+                                        
+                                        <p class="card-text">Item Name : {{ list.p_name }} 
+                                            <br>
+                                            <br>
+                                            Current Bid Price: usd$ {{list.bid | floatformat:2 }} </p>
+                                        <p class="card-text">Item Description : {{ list.p_description }}</p>
+                                        {% for msgtop in msgtop  %}    
+                                            {{msgtop}}
+                                        {% endfor %}   
+                                        <br> 
+                                        
+                                        {% if messages   %}
+                                        {% for msg in messages  %}
+                                            {{msg }}
+                                            
+                                        {% endfor  %}
+                                        {% endif  %}
+
+                                        <br>
+                                        {% for msgtop in msgtop  %}    
+                                            {{msgtop}}
+                                        {% endfor %}        
+                                       
+                                        <div class="d-flex  align-items-left">
+                                            
+                                            <br>
+                                            <br>
+                                            <br>
+                                           
+                                            <form action ="{% url 'submitbid' list.id %}" method ="POST">
+                                                {% csrf_token %}
+                                                <input type="text " name="bid" placeholder="Enter your Bid">
+                                                <br>
+                                                <br>
+                                                <input type = submit class ="btn btn-sm btn-outline-success" value="Click To Bid">
+                                            </form>   
+                                            <br>
+                                            <div class="btn-group">
+                                                
+                                            </div>
+                                            
+                                            <small class="text-muted"></small>
+                                        </div>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <hr>
+                                    <h3>Add Comment </h3>
+                                    <h3>{% if messages %}
+                                            {% for messages in messages %}  
+                                                {{messages}} 
+                                            {% endfor %}
+                                        {% endif  %}
+                                    </h3>
+                                    
+
+                                    <form action="{% url 'comment' list.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type = "text" name ="comment" >
+                                        <input type="submit">
+                                    </form>
+
+                                </td>
+                            </tr>    
+                        </table> 
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+{% endblock %}

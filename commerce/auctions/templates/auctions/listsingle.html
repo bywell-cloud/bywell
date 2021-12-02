@@ -1,0 +1,278 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Details for {{ list.p_name }}</h2>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row ">
+                <div class="col-ms-12">
+                    <center>
+                   
+                    
+                    {% if messages   %}
+                    {% for messages in messages  %}
+                    {% if messages.tags == "success" %}
+                        <p  class=" alert alert-success "  >
+                            {{messages }}
+                        </p>  
+                    {% endif %}
+                    {% if messages.tags == "error" %}
+                        <p  class=" alert alert-danger "  >
+                            {{messages }}
+                        </p>  
+                    {% endif %}
+                        
+                    {% endfor  %}
+                    {% endif  %}
+
+                    <br>
+                        
+                                                
+                    </center>
+                </div>
+
+            </div>
+            <div class="row row-cols-1 g-1">
+               
+                <div class="col">
+                    <div class="card shadow-sm">
+                         
+                        <table >
+                            <tr>
+                                <td>
+                                <img  src =" {{list.image.url}}" width="600" hieght="500">
+                                </td>
+                                <td>
+                                
+                                    <div class="card-body">
+                                        
+                                        <p class="card-text">Item Name : {{ list.p_name }} 
+                                            {% if userlist1 %}
+                                                    
+                                                <a href="{% url 'closelist' list.id %} " class="btn btn-sm btn-outline-success">Close the Bid</a>
+                                                      
+                                                                                
+                                            
+                                            {% endif %}  
+                                            <br>
+                                            <br>
+                                            Current Bid Price: usd$ {% if  bid0 %} {{bid0.price | floatformat:2 }} {% else  %} {{list.bid | floatformat:2 }} {% endif  %}
+                                             </p>
+                                        <p class="card-text">Item Description : {{ list.p_description }}</p>
+                                        {% if msgtop   %}
+                                            {% for msgtop in msgtop  %}    
+                                                {{msgtop}}
+                                            {% endfor %}
+                                        {% endif   %}   
+                                        <br>   
+                                        <font size="small" color ="red">
+                                        {% if msg   %}
+                                            {% for msg in msg  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+                                        {% endif  %}
+                                        
+                                        
+
+                                        {% if msg1   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= red>
+                                            {% for msg in msg1  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+                                        {% endif  %}
+
+                                        {% if msg2   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= red>
+                                            {% for msg in msg2  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+                                        {% endif  %}
+
+                                        {% if msg3   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= red>
+                                            {% for msg in msg3  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+                                        {% endif  %}
+
+                                        {% if msg4   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= red>
+                                            {% for msg in msg4  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+
+                                        {% endif  %}
+
+
+                                        <br>
+                                        {% if msgtop   %}
+                                            {% for msgtop in msgtop  %}    
+                                                {{msgtop}}
+                                            {% endfor %}
+                                        {% endif   %}  
+                                       </font>
+                                        <div class="d-flex  align-items-left">
+                                            
+                                            <br>
+                                            <br>
+                                            <br>
+                                           
+                                            <form action ="{% url 'submitbid' list.id %}" method ="POST">
+                                                {% csrf_token %}
+                                                <input type="text " name="bid" placeholder="Enter your Bid">
+                                                <br>
+                                                <br>
+                                                          
+                                                <input type = submit class ="btn btn-sm btn-outline-success" value="Click To Bid">
+                                            </form>   
+                                            
+                                           
+                                        </div>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <hr>
+                                    <h3>Add Comment </h3>
+                                    {% if msgtopc   %}
+                                        {% for msgtop in msgtopc  %}    
+                                            {{msgtop}}
+                                            
+                                        {% endfor %}<br>
+                                    {% endif   %}   
+                                      
+                                    <font size="small" color ="red">
+                                        {% if msgc   %}
+                                            {% for msg in msgc  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+                                        {% endif  %}
+                                        
+                                        
+
+                                        {% if msg1c   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= red>
+                                            {% for msg in msg1c  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+                                        {% endif  %}
+
+                                        {% if msg2c   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= red>
+                                            {% for msg in msg2c  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+                                        {% endif  %}
+
+                                        {% if msg3c   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= red>
+                                            {% for msg in msg3c  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+                                        {% endif  %}
+
+                                        {% if msg4c   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= red>
+                                            {% for msg in msg4c  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+
+                                        {% endif  %}
+
+                                        {% if msgc1   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= "green">
+                                            {% for msg in msgc1  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+
+                                        {% endif  %}
+
+                                        {% if msg1c1   %}
+                                        </font>
+                                        <font color ="white">
+                                            _
+                                        </font>
+                                        <font color= "green">
+                                            {% for msg in msg1c1  %}
+                                                {{msg }}
+                                        
+                                            {% endfor  %}
+
+                                        {% endif  %}
+
+
+                                        <br>
+                                        {% if msgtopc   %}
+                                            {% for msgtop in msgtopc  %}    
+                                                {{msgtop}}
+                                            {% endfor %}
+                                        {% endif   %}  
+                                       </font>                                   
+
+                                    <form action="{% url 'comment' list.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <textarea name ="comment" rows=4 cols =20 > </textarea>
+                                        <br>
+                                        <input type="submit">
+                                    </form>
+
+                                </td>
+                            </tr>    
+                        </table> 
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+{% endblock %}
