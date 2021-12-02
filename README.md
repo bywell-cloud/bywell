@@ -1,1 +1,1 @@
-# Here are some of my html, javascript, django and php projects
+Here are some of my html, javascript, django and php projects
